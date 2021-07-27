@@ -65,7 +65,6 @@ const SignUp = () => {
             variant="outlined"
             type="email"
             fullWidth
-            onChange={() => { }}
           />
         </div>
         <div key="password">
@@ -77,7 +76,6 @@ const SignUp = () => {
             type="password"
             variant="outlined"
             fullWidth
-            onChange={() => { }}
           />
         </div>
         <div key="password-confirm">
@@ -89,7 +87,6 @@ const SignUp = () => {
             id="password-confirm"
             variant="outlined"
             fullWidth
-            onChange={() => { }}
           />
         </div>
         <div key="button" className="text-center my-5">

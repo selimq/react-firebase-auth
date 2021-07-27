@@ -58,7 +58,6 @@ const ForgotPassword = () => {
                         variant="outlined"
                         type="email"
                         fullWidth
-                        onChange={() => { }}
                     />
                 </div>
 

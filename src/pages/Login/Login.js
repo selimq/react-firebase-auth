@@ -61,7 +61,6 @@ const Login = () => {
             variant="outlined"
             type="email"
             fullWidth
-            onChange={() => {}}
           />
         </div>
         <div key="password">
@@ -73,7 +72,6 @@ const Login = () => {
             type="password"
             variant="outlined"
             fullWidth
-            onChange={() => {}}
           />
         </div>
 
