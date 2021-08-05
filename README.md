@@ -1,7 +1,8 @@
 # react-firebase-auth
 
-React and Firebase auth and firestore operations.
-Full authentication web app with firestore.
+React and Firebase
 
-Using this project react router v6, material ui, tailwind css and firebase sdk.
+Full authentication web app with firebase auth and firestore operations.
+
+Using in this project react router v6, material ui, tailwind css and firebase sdk.
 
