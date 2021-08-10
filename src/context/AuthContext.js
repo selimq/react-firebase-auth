@@ -1,4 +1,3 @@
-import { CircularProgress } from "@material-ui/core";
 import React, { useContext, useState, useEffect } from "react";
 import { auth } from "../firebase";
 import firebase from "firebase/app";

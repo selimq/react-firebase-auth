@@ -10,30 +10,37 @@ import {
 import { Button } from "@material-ui/core";
 import ImageIcon from "@material-ui/icons/Image";
 import { Alert } from "@material-ui/lab";
+import { useAuth } from "../../context/AuthContext";
+
 const ListProducts = () => {
   let navigate = useNavigate();
   const [photoUrl, setPhotoUrl] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
   const [documents, setDocuments] = useState([]);
-  let storageRef = storage.ref("images");
+  const { currentUser } = useAuth();
+
+  let storageRef = storage.ref(`images/${currentUser.email}`);
 
   //func
   //GETTİNG ITEMS FROM FIRESTORE
-  const getItemsFromFirestore = () => {
-    db.collection("flowers")
-      .get()
-      .then((querySnapshot) => {
-        let arr = [];
-        querySnapshot.docs.map((doc) =>
-          arr.push({ id: doc.id, ...doc.data() })
-        );
-        setDocuments(arr);
-      });
-  };
+
   useEffect(() => {
+    const getItemsFromFirestore = () => {
+      db.collection("flowers")
+        .doc(currentUser.email)
+        .collection("userFlowers")
+        .get()
+        .then((querySnapshot) => {
+          let arr = [];
+          querySnapshot.docs.map((doc) =>
+            arr.push({ id: doc.id, ...doc.data() })
+          );
+          setDocuments(arr);
+        });
+    };
     getItemsFromFirestore();
-  }, []);
+  }, [currentUser]);
   //DELETE FUNCTİON FOR PRODUCT FROMFIRESTORE
   function deleteProduct(id) {
     const promises = [];

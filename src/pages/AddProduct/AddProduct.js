@@ -4,6 +4,7 @@ import Alert from "@material-ui/lab/Alert";
 import { db, storage } from "../../firebase";
 import { useNavigate } from "react-router";
 import { DASHBOARD, LISTPRODUCTS } from "../../navigation/CONSTANTS";
+import { useAuth } from "../../context/AuthContext";
 const AddProduct = () => {
   const productName = useRef();
   const productQuantity = useRef();
@@ -12,6 +13,7 @@ const AddProduct = () => {
   const productDetail = useRef();
 
   const [error, setError] = useState("");
+  const { currentUser } = useAuth();
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
@@ -33,7 +35,7 @@ const AddProduct = () => {
   };
   //image func
   const sendPhoto = async (docId) => {
-    let storageRef = storage.ref("images");
+    let storageRef = storage.ref(`images/${currentUser.email}`);
 
     try {
       await storageRef.child(docId).put(selectedFile);
@@ -42,8 +44,11 @@ const AddProduct = () => {
     }
   };
   const addValue = async () => {
+    console.log(currentUser);
     setLoading(true);
     db.collection("flowers")
+      .doc(currentUser.email)
+      .collection("userFlowers")
       .add({
         name: productName.current.value,
         quantity: productQuantity.current.value,
@@ -51,7 +56,7 @@ const AddProduct = () => {
         detail: productDetail.current.value,
       })
       .then((doc) => {
-        console.log(doc.id);
+        // console.log(doc.id);
         setError("");
 
         //!send photo
